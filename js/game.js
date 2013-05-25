@@ -30,7 +30,6 @@ var game = {
      //player sprite
      {name: "gripe_run_right", type:"image", src: "data/img/sprite/gripe_run_right.png"}
 
-
      ];
 
      console.log(game.resources);
@@ -55,6 +54,8 @@ var game = {
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
         me.entityPool.add("mainPlayer", game.PlayerEntity);
+        me.entityPool.add("enemy", game.EnemyEntity);
+
         me.input.bindKey(me.input.KEY.RIGHT, "right");
         me.input.bindKey(me.input.KEY.LEFT, "left");
         me.input.bindKey(me.input.KEY.UP, "up");
