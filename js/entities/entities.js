@@ -6,14 +6,14 @@ game.PlayerEntity = me.ObjectEntity.extend({
 constructor
 ------ */
 init: function(x, y, settings) {
-// call the constructor
-this.parent(x, y, settings);
+    //call the constructor
+    this.parent(x, y, settings);
 
-// set the default horizontal & vertical speed (accel vector)
-this.setVelocity(3, 15);
+    // set the default horizontal & vertical speed (accel vector)
+    this.setVelocity(3, 3);
 
-// set the display to follow our position on both axis
-me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+    // set the display to follow our position on both axis
+    me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 },
 /* -----
@@ -24,25 +24,25 @@ update: function() {
     if (me.input.isKeyPressed('left')) {
         // flip the sprite on horizontal axis
         this.flipX(true);
-        // update the entity velocity
-        this.vel.x -= this.accel.x * me.timer.tick;
-    } else if (me.input.isKeyPressed('right')) {
-        // unflip the sprite
-        this.flipX(false);
-        // update the entity velocity
-        this.vel.x += this.accel.x * me.timer.tick;
-    } else if (me.input.isKeyPressed('up')) {
-        // update the entity velocity
-        this.vel.y -= this.accel.y * me.timer.tick;
-    } else if (me.input.isKeyPressed('down')) {
-        // update the entity velocity
-        this.vel.y += this.accel.y * me.timer.tick;
-    } else {
-        this.vel.y = 0;
-        this.vel.x = 0;
-    }
+    // update the entity velocity
+    this.vel.x -= this.accel.x * me.timer.tick;
+} else if (me.input.isKeyPressed('right')) {
+// unflip the sprite
+this.flipX(false);
+// update the entity velocity
+this.vel.x += this.accel.x * me.timer.tick;
+} else if (me.input.isKeyPressed('up')) {
+// update the entity velocity
+this.vel.y -= this.accel.y * me.timer.tick;
+} else if (me.input.isKeyPressed('down')) {
 
-    if (me.input.isKeyPressed('jump')) {
+    this.vel.y += this.accel.y * me.timer.tick;
+} else {
+    this.vel.y = 0;
+    this.vel.x = 0;
+}
+
+if (me.input.isKeyPressed('jump')) {
 // make sure we are not already jumping or falling
 if (!this.jumping && !this.falling) {
 // set current vel to the maximum defined value
@@ -56,6 +56,16 @@ this.jumping = true;
 
 // check & update player movement
 this.updateMovement();
+
+// check for collision
+var res = me.game.collide(this);
+
+if (res) {
+// if we collide with an enemy
+    if (res.obj.type == me.game.ENEMY_OBJECT) {
+        //??
+    }
+}
 
 // update animation if necessary
 if (this.vel.x!=0 || this.vel.y!=0) {

@@ -21,7 +21,7 @@ var game = {
      */
     // our level tileset
     {name: "area01_level_tiles",  type:"image", src: "data/img/map/area01_level_tiles.png"},
-
+    {name: "Floor_Tiles_Base",  type:"image", src: "data/img/map/Floor_Tiles_Base.png"},
     /* 
     * Maps. 
     */
@@ -32,6 +32,8 @@ var game = {
 
 
      ];
+
+     console.log(game.resources);
 
         // Initialize the audio.
         me.audio.init("mp3,ogg");
